@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@id/tool_bar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/colorWhite"
+    app:popupTheme="@style/ToolbarPopupTheme"
+    app:subtitleTextColor="@color/colorFont">
+
+    <ImageView
+        android:id="@+id/iv_loc"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:src="@mipmap/icon_loc"
+        android:layout_marginLeft="16dp" />
+
+    <ImageView
+        android:id="@+id/iv_add_city"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@+id/iv_loc"
+        android:padding="8dp"
+        android:src="@mipmap/icon_add_city"
+        android:layout_marginLeft="16dp"/>
+
+    <TextView
+        android:id="@+id/title_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/colorFont"
+        android:textSize="20sp"/>
+
+
+</android.support.v7.widget.Toolbar>
+
+
+
+
+
+
