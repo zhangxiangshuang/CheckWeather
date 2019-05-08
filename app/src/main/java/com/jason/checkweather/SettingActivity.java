@@ -58,7 +58,7 @@ public class SettingActivity extends BaseActivity{
         switch (v.getId()){
             case R.id.choose_area:
                 // 跳转到选择地区界面
-                actionStart(ChooseAreaActivity.class);
+                actionStart(MenuSetting.class);
                 break;
             case R.id.about_app:
                 // 跳转到关于天气界面

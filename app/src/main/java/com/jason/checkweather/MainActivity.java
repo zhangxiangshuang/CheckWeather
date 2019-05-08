@@ -73,6 +73,12 @@ public class MainActivity extends BaseActivity{
     private ImageView iv_add_city;
     private ImageView weather_info_code;
 
+    private View include_hourly;
+
+    private View include_forecast;
+    private View include_aqi;
+    private View include_suggestion;
+
     List<String> permissionList  = new ArrayList<>();
 
     // 以下是 weather_noew 的内容
@@ -162,7 +168,6 @@ public class MainActivity extends BaseActivity{
     private String coldInfo;
     private String coldSign;
 
-    private View viewhourly;
 
     public SwipeRefreshLayout swipeRefresh;
 
@@ -187,7 +192,11 @@ public class MainActivity extends BaseActivity{
 
         // 初始化各种控件
 
-        viewhourly=findViewById(R.id.include_hourly);
+
+        include_hourly=findViewById(R.id.include_hourly);
+        include_forecast=findViewById(R.id.include_forecast);
+        include_aqi=findViewById(R.id.include_aqi);
+        include_suggestion=findViewById(R.id.include_suggestion);
 
         weatherLayout = (ScrollView)findViewById(R.id.weather_layout);
         titleCity = (TextView)findViewById(R.id.title_city);
@@ -490,6 +499,7 @@ public class MainActivity extends BaseActivity{
      */
     private void showWeathersInfo(Weathers weathers)
     {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String degree = weathers.now.tmp ;
         String weatherInfo = weathers.now.cond_txt;
         String weatherInfoCode = "weather_"+weathers.now.cond_code;
@@ -528,6 +538,9 @@ public class MainActivity extends BaseActivity{
             maxMinText.setText(forecasts.tmp_max + " ～ " + forecasts.tmp_min);
             forecastLayout.addView(view);
 
+            int includeforecast=prefs.getInt("includeforecastsign",0);
+            setincludeview(include_forecast,includeforecast);
+            //显示小时预报
                 hourList.clear();
         for (Hourly hourly:weathers.hourlyList){
             Hour hour = new Hour();
@@ -539,10 +552,13 @@ public class MainActivity extends BaseActivity{
 
              hourAdapter.notifyDataSetChanged();
 
+
+            int includehourly = prefs.getInt("includehourlysign", 0);
+            setincludeview(include_hourly,includehourly);
         }
     }
     private void showWeatherInfo(Weather weather){
-
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String cityName = weather.basic.cityName;
         String updateTime = weather.basic.update.loc;
         titleCity.setText(cityName);
@@ -608,6 +624,8 @@ public class MainActivity extends BaseActivity{
         pm10Text.getPaint().setFakeBoldText(true);
         so2Text.getPaint().setFakeBoldText(true);
 
+        int includeaqi = prefs.getInt("includeaqisign",0);
+        setincludeview(include_aqi,includeaqi);
         // 舒适指数
 
         comfortSign = weather.suggestion.comfort.sign;
@@ -637,6 +655,9 @@ public class MainActivity extends BaseActivity{
         uvInfo = weather.suggestion.uv.info;
         clothesInfo = weather.suggestion.clothes.info;
         coldInfo = weather.suggestion.cold.info;
+
+        int includesuggestion=prefs.getInt("includesuggestionsign",0);
+        setincludeview(include_suggestion,includesuggestion);
 
         weatherLayout.setVisibility(View.VISIBLE);
         mainLayout.setVisibility(View.VISIBLE);
@@ -748,13 +769,6 @@ public class MainActivity extends BaseActivity{
             case R.id.iv_add_city:
                 Intent intent = new Intent(this,ChooseAreaActivity.class);
                 startActivity(intent);
-                /*if (viewhourly.getVisibility()==0){
-                    viewhourly.setVisibility(View.GONE);
-                }
-                else {
-                    viewhourly.setVisibility(View.VISIBLE);
-                }*/
-
                 break;
             case R.id.iv_loc:
                 showShort("开始定位");
@@ -809,5 +823,15 @@ public class MainActivity extends BaseActivity{
         context.startActivity(intent);
     }
 
+    /**
+     * 设置是否显示函数
+     */
+    public void setincludeview(View view,int sign){
+        if (sign==8){
+            view.setVisibility(View.GONE);
+        }else if (sign==0){
+            view.setVisibility(View.VISIBLE);
+        }
+    }
 
 }
