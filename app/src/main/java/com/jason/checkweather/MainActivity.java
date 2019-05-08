@@ -401,7 +401,7 @@ public class MainActivity extends BaseActivity{
                 requestWeather(currentPosition);
                 showShort(currentPosition + " 定位成功");
             }else{
-                showShort("没有获取到定位权限，请打开定位权限后再打开此应用");
+//                showShort("没有获取到定位权限，请打开定位权限后再打开此应用");
         }
         }
 
@@ -834,4 +834,34 @@ public class MainActivity extends BaseActivity{
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG,"HAHHA");
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        String cityName = prefs.getString("cityName", null);
+        String weatherString = prefs.getString("weatherResponse", null);        // weather 保存API 返回的字符串
+        String weathersString = prefs.getString("weatherResponses", null);
+        if (weatherString != null && weathersString !=null){
+            // 有缓存时直接解析天气数据
+            Weather weather = Utility.handleWeatherResponse(weatherString);
+            Weathers weathers=Utility.handleWeathersResponse(weathersString);
+            showWeatherInfo(weather);
+            showWeathersInfo(weathers);
+        }else {
+            // 无缓存时向服务器查询数据
+            if (getNetworkInfo() != null && getNetworkInfo().isAvailable()){
+                // 查询完之后显示 coordinatorLayout.setVisibility(View.VISIBLE);
+                requestWeather(cityName);
+            }else{
+                showDialog(null, "当前无网络，请打开网络",SIGN_NO_INTERNET);
+            }
+
+        }
+
+
+
+
+
+    }
 }
