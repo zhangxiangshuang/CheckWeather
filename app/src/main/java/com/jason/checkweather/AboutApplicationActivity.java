@@ -11,7 +11,7 @@ import android.widget.Button;
 public class AboutApplicationActivity extends BaseActivity {
 
     private Button github;
-    private Button csdn;
+    private Button qq;
     @Override
     public void initView() {
         setContentView(R.layout.activity_about_application);
@@ -24,7 +24,7 @@ public class AboutApplicationActivity extends BaseActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         github = (Button)findViewById(R.id.github);
-        csdn = (Button)findViewById(R.id.csdn);
+        qq = (Button)findViewById(R.id.qq);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class AboutApplicationActivity extends BaseActivity {
     @Override
     public void initListener() {
         github.setOnClickListener(this);
-        csdn.setOnClickListener(this);
+        qq.setOnClickListener(this);
     }
 
     @Override
@@ -43,10 +43,10 @@ public class AboutApplicationActivity extends BaseActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         switch (v.getId()){
             case R.id.github:
-                intent.setData(Uri.parse("mqqwpa://im/chat?chat_type=wpa&uin=630520570&version=1&src_type=web&web_src=oicqzone.com"));
+                intent.setData(Uri.parse("https://github.com/zhangxiangshuang/CheckWeather"));
                 break;
-            case R.id.csdn:
-                intent.setData(Uri.parse("https://weibo.cn/qr/userinfo?uid=5029421487"));
+            case R.id.qq:
+                intent.setData(Uri.parse("mqqwpa://im/chat?chat_type=wpa&uin=630520570&version=1&src_type=web&web_src=oicqzone.com"));
                 break;
         }
         startActivity(intent);

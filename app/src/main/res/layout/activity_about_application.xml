@@ -71,12 +71,13 @@
                 android:layout_marginTop="10dp"
                 android:background="@android:color/transparent">
 
+
                 <Button
                     android:id="@+id/github"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="点击添加QQ"
+                    android:text="点击查看开源代码"
                     android:textAllCaps="false"
                     android:background="@android:color/transparent"
                     android:textColor="@color/colorFont"
@@ -92,11 +93,11 @@
 
 
                 <Button
-                    android:id="@+id/csdn"
+                    android:id="@+id/qq"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="点击查看个人微博"
+                    android:text="点击添加QQ"
                     android:textAllCaps="false"
                     android:background="@android:color/transparent"
                     android:textColor="@color/colorFont"
