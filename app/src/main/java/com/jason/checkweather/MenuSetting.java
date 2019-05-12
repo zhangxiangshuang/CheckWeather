@@ -26,11 +26,13 @@ public class MenuSetting extends BaseActivity {
     private View include_aqi;
     private View include_suggestion;
     private View include_calculator;
+    private View include_flashlight;
     private Switch switch_hourly;
     private Switch switch_forecast;
     private Switch switch_aqi;
     private Switch switch_suggestion;
     private Switch switch_calculator;
+    private Switch switch_flashlight;
     private LinearLayout mainview;
     @Override
     public void initView() {
@@ -48,29 +50,34 @@ public class MenuSetting extends BaseActivity {
         include_aqi=view.findViewById(R.id.include_aqi);
         include_suggestion=view.findViewById(R.id.include_suggestion);
         include_calculator=view.findViewById(R.id.include_calculator);
+        include_flashlight=view.findViewById(R.id.include_flashlight);
 
         switch_hourly= (Switch) findViewById(R.id.switch_hourly);
         switch_forecast= (Switch) findViewById(R.id.switch_forecast);
         switch_aqi= (Switch) findViewById(R.id.switch_aqi);
         switch_suggestion= (Switch) findViewById(R.id.switch_suggestion);
         switch_calculator= (Switch) findViewById(R.id.switch_calculator);
+        switch_flashlight= (Switch) findViewById(R.id.switch_flashlight);
         mainview= (LinearLayout) view.findViewById(R.id.main_layout);
+
+
+    }
+
+    @Override
+    public void initData() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         int hourlysign=prefs.getInt("includehourlysign",0);
         int forecastsign=prefs.getInt("includeforecastsign",0);
         int aqisign=prefs.getInt("includeaqisign",0);
         int suggestionsign=prefs.getInt("includesuggestionsign",0);
-        int calculator=prefs.getInt("includecalculatorsign",0);
+        int calculatorsign=prefs.getInt("includecalculatorsign",0);
+        int flashlightsign=prefs.getInt("includeflashlightsign",0);
         setOnChecked(switch_hourly,hourlysign);
         setOnChecked(switch_forecast,forecastsign);
         setOnChecked(switch_aqi,aqisign);
         setOnChecked(switch_suggestion,suggestionsign);
-        setOnChecked(switch_calculator,calculator);
-    }
-
-    @Override
-    public void initData() {
-
+        setOnChecked(switch_calculator,calculatorsign);
+        setOnChecked(switch_flashlight,flashlightsign);
     }
 
     @Override
@@ -80,85 +87,8 @@ public class MenuSetting extends BaseActivity {
         setSwitchOnChecked(switch_aqi,include_aqi,"includeaqisign");
         setSwitchOnChecked(switch_suggestion,include_suggestion,"includesuggestionsign");
         setSwitchOnChecked(switch_calculator,include_calculator,"includecalculatorsign");
+        setSwitchOnChecked(switch_flashlight,include_flashlight,"includeflashlightsign");
 
-
-       /* switch_hourly.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(MenuSetting.this).edit();
-                if (isChecked){
-                    include_hourly.setVisibility(View.VISIBLE);
-                    editor.putInt("includehourlysign", include_hourly.getVisibility());
-                    editor.apply();
-                }else {
-                    include_hourly.setVisibility(View.GONE);
-                    editor.putInt("includehourlysign", include_hourly.getVisibility());
-                    editor.apply();
-                }
-            }
-        });
-
-        switch_forecast.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(MenuSetting.this).edit();
-                if (isChecked){
-                    include_forecast.setVisibility(View.VISIBLE);
-                    editor.putInt("includeforecastsign", include_forecast.getVisibility());
-                    editor.apply();
-                }else {
-                    include_forecast.setVisibility(View.GONE);
-                    editor.putInt("includeforecastsign", include_forecast.getVisibility());
-                    editor.apply();
-                }
-            }
-        });
-
-        switch_aqi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(MenuSetting.this).edit();
-                if (isChecked){
-                    include_aqi.setVisibility(View.VISIBLE);
-                    editor.putInt("includeaqisign", include_aqi.getVisibility());
-                    editor.apply();
-                }else {
-                    include_aqi.setVisibility(View.GONE);
-                    editor.putInt("includeaqisign", include_aqi.getVisibility());
-                    editor.apply();
-                }
-            }
-        });
-        switch_suggestion.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(MenuSetting.this).edit();
-                if (isChecked){
-                    include_suggestion.setVisibility(View.VISIBLE);
-                    editor.putInt("includesuggestionsign", include_suggestion.getVisibility());
-                    editor.apply();
-                }else {
-                    include_suggestion.setVisibility(View.GONE);
-                    editor.putInt("includesuggestionsign", include_suggestion.getVisibility());
-                    editor.apply();
-                }
-            }
-        });
-        switch_calculator.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(MenuSetting.this).edit();
-                if (isChecked){
-                    include_calculator.setVisibility(View.VISIBLE);
-                    editor.putInt("includecalculatorsign", include_calculator.getVisibility());
-                    editor.apply();
-                }else {
-                    include_calculator.setVisibility(View.GONE);
-                    editor.putInt("includecalculatorsign", include_calculator.getVisibility());
-                    editor.apply();
-                }
-            }
-        });*/
     }
 
 
@@ -190,7 +120,9 @@ public class MenuSetting extends BaseActivity {
             switch1.setChecked(false);
         }
     }
-
+    /*
+        设置switch开关的点击事件
+         */
     public void setSwitchOnChecked(Switch s, final View view1, final String string){
         s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

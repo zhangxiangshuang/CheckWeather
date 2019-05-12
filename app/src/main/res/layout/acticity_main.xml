@@ -68,6 +68,14 @@
                     android:id="@+id/include_calculator"
                     layout="@layout/calculator"/>
 
+                <include
+                    android:id="@+id/space_flashlight"
+                    layout="@layout/weather_space"/>
+
+                <include
+                    android:id="@+id/include_flashlight"
+                    layout="@layout/flashlight"/>
+
                 <include layout="@layout/weather_author"/>
 
 

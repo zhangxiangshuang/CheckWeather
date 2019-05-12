@@ -85,6 +85,8 @@ public class MainActivity extends BaseActivity{
     private View space_suggestion;
     private View include_calculator;
     private View space_calculator;
+    private View include_flashlight;
+    private View space_flashlight;
 
     List<String> permissionList  = new ArrayList<>();
 
@@ -97,6 +99,7 @@ public class MainActivity extends BaseActivity{
     private RelativeLayout weaherNowLayout;
 
     private  RelativeLayout calculator;
+    private RelativeLayout flashlight;
 
     private TextView updateTimeText;
 
@@ -207,13 +210,14 @@ public class MainActivity extends BaseActivity{
         include_aqi=findViewById(R.id.include_aqi);
         include_suggestion=findViewById(R.id.include_suggestion);
         include_calculator=findViewById(R.id.calculator_layout);
+        include_flashlight=findViewById(R.id.include_flashlight);
 
         space_hourly=findViewById(R.id.space_hourly);
         space_forecast=findViewById(R.id.space_forecast);
         space_aqi=findViewById(R.id.space_aqi);
         space_suggestion=findViewById(R.id.space_suggestion);
         space_calculator=findViewById(R.id.space_calculator);
-
+        space_flashlight=findViewById(R.id.space_flashlight);
 
 
         weatherLayout = (ScrollView)findViewById(R.id.weather_layout);
@@ -269,6 +273,9 @@ public class MainActivity extends BaseActivity{
 
         //计算器
         calculator = (RelativeLayout) findViewById(R.id.calculator_layout);
+
+        //手电筒
+        flashlight= (RelativeLayout) findViewById(R.id.flashlight_layout);
 
         // LBS
         mlocationClient = new LocationClient(getApplicationContext());
@@ -330,6 +337,7 @@ public class MainActivity extends BaseActivity{
         iv_loc.setOnClickListener(this);
         weaherNowLayout.setOnClickListener(this);
         calculator.setOnClickListener(this);
+        flashlight.setOnClickListener(this);
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -689,6 +697,10 @@ public class MainActivity extends BaseActivity{
         setincludeview(include_calculator,includecalculator);
         setincludeview(space_calculator,includecalculator);
 
+        int includeflashlight = prefs.getInt("includeflashlightsign",0);
+        setincludeview(include_flashlight,includeflashlight);
+        setincludeview(space_flashlight,includeflashlight);
+
         weatherLayout.setVisibility(View.VISIBLE);
         mainLayout.setVisibility(View.VISIBLE);
 
@@ -814,6 +826,10 @@ public class MainActivity extends BaseActivity{
             case R.id.calculator_layout:
                 Intent intent2 = new Intent(this,CalculatorActivity.class);
                 startActivity(intent2);
+                break;
+            case R.id.flashlight_layout:
+                Intent intent3 = new Intent(this,FlashlightActivity.class);
+                startActivity(intent3);
                 break;
             default:
                 break;
