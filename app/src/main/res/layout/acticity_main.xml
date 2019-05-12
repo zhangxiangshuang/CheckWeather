@@ -31,27 +31,42 @@
 
                 <include layout="@layout/weather_now" />
 
-                <include layout="@layout/weather_space"/>
+                <include
+                    android:id="@+id/space_hourly"
+                    layout="@layout/weather_space"/>
 
                 <include
                     android:id="@+id/include_hourly"
                     layout="@layout/weather_hourly" />
 
-                <include layout="@layout/weather_space"/>
+                <include
+                    android:id="@+id/space_forecast"
+                    layout="@layout/weather_space"/>
 
                 <include
                     android:id="@+id/include_forecast"
                     layout="@layout/weather_forecast"/>
 
-                <include layout="@layout/weather_space"/>
+                <include
+                    android:id="@+id/space_aqi"
+                    layout="@layout/weather_space"/>
 
                 <include android:id="@+id/include_aqi"
                     layout="@layout/weather_aqi"/>
 
-                <include layout="@layout/weather_space"/>
+                <include android:id="@+id/space_suggestion"
+                    layout="@layout/weather_space"/>
 
                 <include android:id="@+id/include_suggestion"
                     layout="@layout/weather_suggestion"/>
+
+                <include
+                    android:id="@+id/space_calculator"
+                    layout="@layout/weather_space"/>
+
+                <include
+                    android:id="@+id/include_calculator"
+                    layout="@layout/calculator"/>
 
                 <include layout="@layout/weather_author"/>
 

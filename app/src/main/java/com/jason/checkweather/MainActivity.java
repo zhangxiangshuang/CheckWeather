@@ -73,11 +73,18 @@ public class MainActivity extends BaseActivity{
     private ImageView iv_add_city;
     private ImageView weather_info_code;
 
-    private View include_hourly;
+    //引入布局开关
 
+    private View include_hourly;
+    private View space_hourly;
     private View include_forecast;
+    private View space_forecast;
     private View include_aqi;
+    private View space_aqi;
     private View include_suggestion;
+    private View space_suggestion;
+    private View include_calculator;
+    private View space_calculator;
 
     List<String> permissionList  = new ArrayList<>();
 
@@ -88,6 +95,8 @@ public class MainActivity extends BaseActivity{
     private TextView weatherInfoText;
 
     private RelativeLayout weaherNowLayout;
+
+    private  RelativeLayout calculator;
 
     private TextView updateTimeText;
 
@@ -197,6 +206,15 @@ public class MainActivity extends BaseActivity{
         include_forecast=findViewById(R.id.include_forecast);
         include_aqi=findViewById(R.id.include_aqi);
         include_suggestion=findViewById(R.id.include_suggestion);
+        include_calculator=findViewById(R.id.calculator_layout);
+
+        space_hourly=findViewById(R.id.space_hourly);
+        space_forecast=findViewById(R.id.space_forecast);
+        space_aqi=findViewById(R.id.space_aqi);
+        space_suggestion=findViewById(R.id.space_suggestion);
+        space_calculator=findViewById(R.id.space_calculator);
+
+
 
         weatherLayout = (ScrollView)findViewById(R.id.weather_layout);
         titleCity = (TextView)findViewById(R.id.title_city);
@@ -248,6 +266,9 @@ public class MainActivity extends BaseActivity{
         uvBtn = (Button)findViewById(R.id.uv_button);
         clothesBtn = (Button)findViewById(R.id.clothes_button);
         coldBtn = (Button)findViewById(R.id.cold_button);
+
+        //计算器
+        calculator = (RelativeLayout) findViewById(R.id.calculator_layout);
 
         // LBS
         mlocationClient = new LocationClient(getApplicationContext());
@@ -308,6 +329,7 @@ public class MainActivity extends BaseActivity{
         iv_add_city.setOnClickListener(this);
         iv_loc.setOnClickListener(this);
         weaherNowLayout.setOnClickListener(this);
+        calculator.setOnClickListener(this);
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -417,7 +439,7 @@ public class MainActivity extends BaseActivity{
      */
     public void requestWeather(final String cityName){
 
-        String address = "https://free-api.heweather.com/v5/weather?city=" + cityName + "&key=8a439a7e0e034cdcb4122c918f55e5f3";
+        String address = "https://free-api.heweather.com/v5/weather?city=" + cityName + "&key=a0187789a4424bc89254728acd4a08ed";
         String addresss ="https://free-api.heweather.net/s6/weather?location=" + cityName + "&key=0c6010f67e4648e39af80b623c4b0cd1";
         Log.i(TAG,address);
         Log.i(TAG,addresss);
@@ -540,6 +562,7 @@ public class MainActivity extends BaseActivity{
 
             int includeforecast=prefs.getInt("includeforecastsign",0);
             setincludeview(include_forecast,includeforecast);
+            setincludeview(space_forecast,includeforecast);
             //显示小时预报
                 hourList.clear();
         for (Hourly hourly:weathers.hourlyList){
@@ -555,6 +578,7 @@ public class MainActivity extends BaseActivity{
 
             int includehourly = prefs.getInt("includehourlysign", 0);
             setincludeview(include_hourly,includehourly);
+            setincludeview(space_hourly,includehourly);
         }
     }
     private void showWeatherInfo(Weather weather){
@@ -626,6 +650,7 @@ public class MainActivity extends BaseActivity{
 
         int includeaqi = prefs.getInt("includeaqisign",0);
         setincludeview(include_aqi,includeaqi);
+        setincludeview(space_aqi,includeaqi);
         // 舒适指数
 
         comfortSign = weather.suggestion.comfort.sign;
@@ -658,6 +683,11 @@ public class MainActivity extends BaseActivity{
 
         int includesuggestion=prefs.getInt("includesuggestionsign",0);
         setincludeview(include_suggestion,includesuggestion);
+        setincludeview(space_suggestion,includesuggestion);
+
+        int includecalculator = prefs.getInt("includecalculatorsign",0);
+        setincludeview(include_calculator,includecalculator);
+        setincludeview(space_calculator,includecalculator);
 
         weatherLayout.setVisibility(View.VISIBLE);
         mainLayout.setVisibility(View.VISIBLE);
@@ -780,6 +810,11 @@ public class MainActivity extends BaseActivity{
             case R.id.weather_now_layout:
                 Intent intent1 = new Intent(this,NowInfoActivity.class);
                 startActivity(intent1);
+                break;
+            case R.id.calculator_layout:
+                Intent intent2 = new Intent(this,CalculatorActivity.class);
+                startActivity(intent2);
+                break;
             default:
                 break;
         }
