@@ -83,10 +83,9 @@ public class MainActivity extends BaseActivity{
     private View space_aqi;
     private View include_suggestion;
     private View space_suggestion;
-    private View include_calculator;
-    private View space_calculator;
     private View include_flashlight;
     private View space_flashlight;
+    private View include_addfunction;
 
     List<String> permissionList  = new ArrayList<>();
 
@@ -98,7 +97,7 @@ public class MainActivity extends BaseActivity{
 
     private RelativeLayout weaherNowLayout;
 
-    private  RelativeLayout calculator;
+
     private RelativeLayout flashlight;
 
     private TextView updateTimeText;
@@ -214,14 +213,13 @@ public class MainActivity extends BaseActivity{
         include_forecast=findViewById(R.id.include_forecast);
         include_aqi=findViewById(R.id.include_aqi);
         include_suggestion=findViewById(R.id.include_suggestion);
-        include_calculator=findViewById(R.id.calculator_layout);
         include_flashlight=findViewById(R.id.include_flashlight);
+        include_addfunction=findViewById(R.id.include_addfunction);
 
         space_hourly=findViewById(R.id.space_hourly);
         space_forecast=findViewById(R.id.space_forecast);
         space_aqi=findViewById(R.id.space_aqi);
         space_suggestion=findViewById(R.id.space_suggestion);
-        space_calculator=findViewById(R.id.space_calculator);
         space_flashlight=findViewById(R.id.space_flashlight);
 
 
@@ -281,8 +279,6 @@ public class MainActivity extends BaseActivity{
         flashlightBtn= (Button) findViewById(R.id.flashlight_button);
         noteBtn= (Button) findViewById(R.id.note_button);
 
-        //计算器
-        calculator = (RelativeLayout) findViewById(R.id.calculator_layout);
 
         //手电筒
         flashlight= (RelativeLayout) findViewById(R.id.flashlight_layout);
@@ -346,8 +342,8 @@ public class MainActivity extends BaseActivity{
         iv_add_city.setOnClickListener(this);
         iv_loc.setOnClickListener(this);
         weaherNowLayout.setOnClickListener(this);
-        calculator.setOnClickListener(this);
-        flashlight.setOnClickListener(this);
+//        calculator.setOnClickListener(this);
+//        flashlight.setOnClickListener(this);
         calculatorBtn.setOnClickListener(this);
         flashlightBtn.setOnClickListener(this);
         noteBtn.setOnClickListener(this);
@@ -706,13 +702,12 @@ public class MainActivity extends BaseActivity{
         setincludeview(include_suggestion,includesuggestion);
         setincludeview(space_suggestion,includesuggestion);
 
-        int includecalculator = prefs.getInt("includecalculatorsign",0);
-        setincludeview(include_calculator,includecalculator);
-        setincludeview(space_calculator,includecalculator);
+
 
         int includeflashlight = prefs.getInt("includeflashlightsign",0);
         setincludeview(include_flashlight,includeflashlight);
         setincludeview(space_flashlight,includeflashlight);
+        setincludeview(include_addfunction,includeflashlight);
 
         weatherLayout.setVisibility(View.VISIBLE);
         mainLayout.setVisibility(View.VISIBLE);
@@ -836,14 +831,6 @@ public class MainActivity extends BaseActivity{
                 Intent intent1 = new Intent(this,NowInfoActivity.class);
                 startActivity(intent1);
                 break;
-            case R.id.calculator_layout:
-                Intent intent2 = new Intent(this,CalculatorActivity.class);
-                startActivity(intent2);
-                break;
-            case R.id.flashlight_layout:
-                Intent intent3 = new Intent(this,FlashlightActivity.class);
-                startActivity(intent3);
-                break;
             case R.id.calculator_button:
                 Intent intent4 = new Intent(this,CalculatorActivity.class);
                 startActivity(intent4);
@@ -851,6 +838,10 @@ public class MainActivity extends BaseActivity{
             case R.id.flashlight_button:
                 Intent intent5 = new Intent(this,FlashlightActivity.class);
                 startActivity(intent5);
+                break;
+            case R.id.note_button:
+                Intent intent6 = new Intent(this,NoteActivity.class);
+                startActivity(intent6);
                 break;
             default:
                 break;

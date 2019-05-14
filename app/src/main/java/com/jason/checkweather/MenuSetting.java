@@ -31,7 +31,6 @@ public class MenuSetting extends BaseActivity {
     private Switch switch_forecast;
     private Switch switch_aqi;
     private Switch switch_suggestion;
-    private Switch switch_calculator;
     private Switch switch_flashlight;
     private LinearLayout mainview;
     @Override
@@ -49,14 +48,12 @@ public class MenuSetting extends BaseActivity {
         include_forecast=view.findViewById(R.id.include_forecast);
         include_aqi=view.findViewById(R.id.include_aqi);
         include_suggestion=view.findViewById(R.id.include_suggestion);
-        include_calculator=view.findViewById(R.id.include_calculator);
         include_flashlight=view.findViewById(R.id.include_flashlight);
 
         switch_hourly= (Switch) findViewById(R.id.switch_hourly);
         switch_forecast= (Switch) findViewById(R.id.switch_forecast);
         switch_aqi= (Switch) findViewById(R.id.switch_aqi);
         switch_suggestion= (Switch) findViewById(R.id.switch_suggestion);
-        switch_calculator= (Switch) findViewById(R.id.switch_calculator);
         switch_flashlight= (Switch) findViewById(R.id.switch_flashlight);
         mainview= (LinearLayout) view.findViewById(R.id.main_layout);
 
@@ -70,13 +67,11 @@ public class MenuSetting extends BaseActivity {
         int forecastsign=prefs.getInt("includeforecastsign",0);
         int aqisign=prefs.getInt("includeaqisign",0);
         int suggestionsign=prefs.getInt("includesuggestionsign",0);
-        int calculatorsign=prefs.getInt("includecalculatorsign",0);
         int flashlightsign=prefs.getInt("includeflashlightsign",0);
         setOnChecked(switch_hourly,hourlysign);
         setOnChecked(switch_forecast,forecastsign);
         setOnChecked(switch_aqi,aqisign);
         setOnChecked(switch_suggestion,suggestionsign);
-        setOnChecked(switch_calculator,calculatorsign);
         setOnChecked(switch_flashlight,flashlightsign);
     }
 
@@ -86,7 +81,6 @@ public class MenuSetting extends BaseActivity {
         setSwitchOnChecked(switch_forecast,include_forecast,"includeforecastsign");
         setSwitchOnChecked(switch_aqi,include_aqi,"includeaqisign");
         setSwitchOnChecked(switch_suggestion,include_suggestion,"includesuggestionsign");
-        setSwitchOnChecked(switch_calculator,include_calculator,"includecalculatorsign");
         setSwitchOnChecked(switch_flashlight,include_flashlight,"includeflashlightsign");
 
     }

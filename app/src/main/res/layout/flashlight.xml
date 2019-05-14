@@ -13,13 +13,13 @@
         android:background="@color/colorWhite">
 
         <TextView
-            android:text="手电筒"
+            android:text="附加功能"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
             android:textColor="@color/colorFont"
-            android:textSize="50sp"/>
+            android:textSize="30sp"/>
 
 
     </RelativeLayout>

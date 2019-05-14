@@ -60,13 +60,6 @@
                 <include android:id="@+id/include_suggestion"
                     layout="@layout/weather_suggestion"/>
 
-                <include
-                    android:id="@+id/space_calculator"
-                    layout="@layout/weather_space"/>
-
-                <include
-                    android:id="@+id/include_calculator"
-                    layout="@layout/calculator"/>
 
                 <include
                     android:id="@+id/space_flashlight"
@@ -76,11 +69,9 @@
                     android:id="@+id/include_flashlight"
                     layout="@layout/flashlight"/>
 
+
                 <include
-                    android:id="@+id/space_function"
-                    layout="@layout/weather_space"/>
-                <include
-                    android:id="@+id/function"
+                    android:id="@+id/include_addfunction"
                     layout="@layout/additional_function"/>
                 <include layout="@layout/weather_author"/>
 
