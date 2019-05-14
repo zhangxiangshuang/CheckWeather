@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="2.5dp"
+            android:background="@color/colorWhite"
+
+            >
+
+            <Button
+                android:id="@+id/note_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="?android:attr/borderlessButtonStyle"
+                android:background="@drawable/ripple" />
+
+            <TextView
+                android:id="@+id/comfort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:layout_below="@+id/note_pic"
+                android:text="备忘录"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/colorFont"
+                android:textSize="15sp"/>
+
+            <ImageView
+                android:id="@+id/note_pic"
+                android:src="@drawable/note"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="10dp"/>
+
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2.5dp"
+            android:layout_marginRight="2.5dp"
+            android:background="@color/colorWhite">
+
+            <Button
+                android:id="@+id/calculator_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="?android:attr/borderlessButtonStyle"
+                android:background="@drawable/ripple"/>
+
+            <TextView
+                android:id="@+id/car_wash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/calculator_pic"
+                android:text="计算器"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/colorFont"
+                android:textSize="15sp"/>
+
+            <ImageView
+                android:id="@+id/calculator_pic"
+                android:src="@drawable/calculator"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="10dp"/>
+
+
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2.5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/colorWhite">
+
+            <Button
+                android:id="@+id/flashlight_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="?android:attr/borderlessButtonStyle"
+                android:background="@drawable/ripple"/>
+
+            <TextView
+                android:id="@+id/sport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/flashlight_pic"
+                android:text="手电筒"
+                android:textColor="@color/colorFont"
+                android:layout_centerHorizontal="true"
+                android:textSize="15sp"/>
+
+            <ImageView
+                android:id="@+id/flashlight_pic"
+                android:src="@drawable/flashlight"
+                android:layout_width="30dp"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:scaleType="centerCrop"/>
+
+
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -179,7 +179,12 @@ public class MainActivity extends BaseActivity{
 
     private String coldInfo;
     private String coldSign;
+    // 以下是 additional_function 内容
+    private Button noteBtn;
 
+    private Button flashlightBtn;
+
+    private Button calculatorBtn;
 
     public SwipeRefreshLayout swipeRefresh;
 
@@ -271,6 +276,11 @@ public class MainActivity extends BaseActivity{
         clothesBtn = (Button)findViewById(R.id.clothes_button);
         coldBtn = (Button)findViewById(R.id.cold_button);
 
+        //附加功能
+        calculatorBtn= (Button) findViewById(R.id.calculator_button);
+        flashlightBtn= (Button) findViewById(R.id.flashlight_button);
+        noteBtn= (Button) findViewById(R.id.note_button);
+
         //计算器
         calculator = (RelativeLayout) findViewById(R.id.calculator_layout);
 
@@ -338,6 +348,9 @@ public class MainActivity extends BaseActivity{
         weaherNowLayout.setOnClickListener(this);
         calculator.setOnClickListener(this);
         flashlight.setOnClickListener(this);
+        calculatorBtn.setOnClickListener(this);
+        flashlightBtn.setOnClickListener(this);
+        noteBtn.setOnClickListener(this);
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -830,6 +843,14 @@ public class MainActivity extends BaseActivity{
             case R.id.flashlight_layout:
                 Intent intent3 = new Intent(this,FlashlightActivity.class);
                 startActivity(intent3);
+                break;
+            case R.id.calculator_button:
+                Intent intent4 = new Intent(this,CalculatorActivity.class);
+                startActivity(intent4);
+                break;
+            case R.id.flashlight_button:
+                Intent intent5 = new Intent(this,FlashlightActivity.class);
+                startActivity(intent5);
                 break;
             default:
                 break;

@@ -76,6 +76,12 @@
                     android:id="@+id/include_flashlight"
                     layout="@layout/flashlight"/>
 
+                <include
+                    android:id="@+id/space_function"
+                    layout="@layout/weather_space"/>
+                <include
+                    android:id="@+id/function"
+                    layout="@layout/additional_function"/>
                 <include layout="@layout/weather_author"/>
 
 
