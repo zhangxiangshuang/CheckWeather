@@ -8,9 +8,7 @@ import com.jason.checkweather.gson.Weathers;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-/**
- * Created by len_titude on 2017/4/26.
- */
+
 
 public class Utility {
     /**

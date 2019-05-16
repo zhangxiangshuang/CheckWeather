@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:background="@color/colorWhite">
+    android:background="@drawable/shape_corner_down">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/weather_hourly"

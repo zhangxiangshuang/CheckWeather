@@ -3,9 +3,7 @@ package com.jason.checkweather.util;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
-/**
- * Created by len_titude on 2017/4/26.
- */
+
 
 public class HttpUtil {
     public static void sendOkHttpRequest(String address, okhttp3.Callback callback){

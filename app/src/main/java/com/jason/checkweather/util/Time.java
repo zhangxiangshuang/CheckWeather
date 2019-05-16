@@ -102,4 +102,51 @@ public class Time {
 
     }
 
+
+    /**
+     * 输入时间 XXXX-XX-XX 的字符串, 返回中文指代的周几, 比如 "今天 "
+     */
+    public static String parseTimeWeek(String timeText){
+        DateTime dateTime = new DateTime();
+        String[] time = timeText.split("-");
+
+        int currentMonth = dateTime.getMonthOfYear();
+        int currentDay = dateTime.getDayOfMonth();
+        int currentWeak = dateTime.getDayOfWeek();
+        int currentYear = dateTime.getYear();
+
+        int month = Integer.parseInt(time[1]);
+        int day = Integer.parseInt(time[2]);
+        int year = Integer.parseInt(time[0]);
+
+        int offset = 0;  // 相差量
+
+        if (year == currentYear){
+            //如果是同一年：
+            if (month == currentMonth){
+                // 如果是同一个月
+                offset = day - currentDay;
+
+            }else{
+                offset = day + parseMonth(currentMonth, currentYear) - currentDay;
+            }
+
+        }else{
+            offset = 31 - currentDay + day;
+        }
+
+
+        if (offset == 0) return "今天 " ;
+        if (offset == 1) return  "明天 " ;
+        return parseWeak(currentWeak + offset);
+
+    }
+    public static String parseTimeDate(String timeText){
+        DateTime dateTime = new DateTime();
+        String[] time = timeText.split("-");
+        String monthAndDay = time[1] + "/" + time[2];
+
+        return monthAndDay;
+
+    }
 }

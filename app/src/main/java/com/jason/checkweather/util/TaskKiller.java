@@ -5,9 +5,7 @@ import android.app.Activity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by len_titude on 2017/4/30.
- */
+
 
 public class TaskKiller {
 

@@ -36,6 +36,10 @@
                     layout="@layout/weather_space"/>
 
                 <include
+                    android:id="@+id/include_title_hourly"
+                    layout="@layout/title_hourly" />
+
+                <include
                     android:id="@+id/include_hourly"
                     layout="@layout/weather_hourly" />
 
@@ -48,14 +52,24 @@
                     layout="@layout/weather_forecast"/>
 
                 <include
+                    android:id="@+id/include_title_forecast"
+                    layout="@layout/title_forecast"/>
+
+                <include
                     android:id="@+id/space_aqi"
                     layout="@layout/weather_space"/>
+
+                <include android:id="@+id/include_title_aqi"
+                    layout="@layout/title_aqi"/>
 
                 <include android:id="@+id/include_aqi"
                     layout="@layout/weather_aqi"/>
 
                 <include android:id="@+id/space_suggestion"
                     layout="@layout/weather_space"/>
+
+                <include android:id="@+id/include_title_suggestion"
+                    layout="@layout/title_suggestion"/>
 
                 <include android:id="@+id/include_suggestion"
                     layout="@layout/weather_suggestion"/>

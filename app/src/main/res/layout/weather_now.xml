@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="400dp"
-    android:background="@color/colorWhite">
+    android:background="@drawable/shape_corner_down">
 
 
     <RelativeLayout
         android:id="@+id/weather_now_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite">
+        android:background="@drawable/shape_corner_down">
 
         <TextView
             android:id="@+id/degree_text"

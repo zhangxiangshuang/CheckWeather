@@ -7,13 +7,13 @@
 
 
     <RelativeLayout
-        android:id="@+id/flashlight_layout"
+        android:id="@+id/title_suggestion"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/shape_corner_up">
 
         <TextView
-            android:text="附加功能"
+            android:text="生活指数"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_marginTop="4dp"
-            android:background="#0C0C0C" />
+            android:background="#808080" />
 
     </RelativeLayout>
 

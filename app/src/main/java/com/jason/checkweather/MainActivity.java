@@ -85,7 +85,11 @@ public class MainActivity extends BaseActivity{
     private View space_suggestion;
     private View include_flashlight;
     private View space_flashlight;
+    private View include_title_aqi;
+    private View include_title_huorly;
+    private View include_title_suggestion;
     private View include_addfunction;
+    private View include_title_forecast;
 
     List<String> permissionList  = new ArrayList<>();
 
@@ -96,7 +100,7 @@ public class MainActivity extends BaseActivity{
     private TextView weatherInfoText;
 
     private RelativeLayout weaherNowLayout;
-
+    private RelativeLayout titleForecastLayout;
 
     private RelativeLayout flashlight;
 
@@ -215,6 +219,10 @@ public class MainActivity extends BaseActivity{
         include_suggestion=findViewById(R.id.include_suggestion);
         include_flashlight=findViewById(R.id.include_flashlight);
         include_addfunction=findViewById(R.id.include_addfunction);
+        include_title_huorly=findViewById(R.id.include_title_hourly);
+        include_title_suggestion=findViewById(R.id.title_suggestion);
+        include_title_aqi=findViewById(R.id.include_title_aqi);
+        include_title_forecast=findViewById(R.id.include_title_forecast);
 
         space_hourly=findViewById(R.id.space_hourly);
         space_forecast=findViewById(R.id.space_forecast);
@@ -230,6 +238,9 @@ public class MainActivity extends BaseActivity{
         weather_info_code= (ImageView) findViewById(R.id.weather_info_code);
         forecastLayout = (LinearLayout)findViewById(R.id.forecast_layout);
         mainLayout = (LinearLayout) findViewById(R.id.main_layout);
+
+        titleForecastLayout= (RelativeLayout) findViewById(R.id.title_forecast);
+
 
         // weather_now
         degreeText = (TextView)findViewById(R.id.degree_text);
@@ -342,8 +353,7 @@ public class MainActivity extends BaseActivity{
         iv_add_city.setOnClickListener(this);
         iv_loc.setOnClickListener(this);
         weaherNowLayout.setOnClickListener(this);
-//        calculator.setOnClickListener(this);
-//        flashlight.setOnClickListener(this);
+       titleForecastLayout.setOnClickListener(this);
         calculatorBtn.setOnClickListener(this);
         flashlightBtn.setOnClickListener(this);
         noteBtn.setOnClickListener(this);
@@ -487,7 +497,7 @@ public class MainActivity extends BaseActivity{
                             editor.apply();
                             showWeatherInfo(weather);
                         }else{
-                            showShort("获取天气信息2失败");
+//                            showShort("获取天气信息2失败");
                         }
                     }
                 });
@@ -521,7 +531,7 @@ public class MainActivity extends BaseActivity{
                             editor.apply();
                             showWeathersInfo(weathers);
                         }else{
-                            showShort("获取天气信息2失败");
+//                            showShort("获取天气信息2失败");
                         }
                     }
                 });
@@ -549,7 +559,43 @@ public class MainActivity extends BaseActivity{
         degreeText.setText(degree);
         weatherInfoText.setText(weatherInfo);
         forecastLayout.removeAllViews();
-        for (Forecasts forecasts : weathers.forecastList){
+
+
+        for (int i=0;i<3;i++){
+            Forecasts forecasts= weathers.forecastList.get(i);
+            View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.weather_forecast_item, forecastLayout, false);
+            TextView dateText = (TextView)view.findViewById(R.id.data_text);
+            TextView infoText = (TextView)view.findViewById(R.id.info_text);
+            TextView maxMinText = (TextView)view.findViewById(R.id.max_min_text);
+            ImageView weatherPic = (ImageView)view.findViewById(R.id.weather_pic);
+
+            // 动态获取 资源id
+            String weatherCode = "weather_"+forecasts.cond_code_d;
+            int resId = getResources().getIdentifier(weatherCode, "drawable", this.getPackageName());
+            if (resId != 0){
+                weatherPic.setImageResource(resId);
+            }
+            String infotext;
+            if(forecasts.cond_txt_d.equals(forecasts.cond_txt_n)){
+                infotext=forecasts.cond_txt_d;
+            }else
+            {
+                infotext=forecasts.cond_txt_d+"转"+forecasts.cond_txt_n;
+            }
+            dateText.setText(Time.parseTime(forecasts.date));
+//            dateText.setText(forecasts.date);
+
+            infoText.setText(infotext);
+            maxMinText.setText(forecasts.tmp_max + " ～ " + forecasts.tmp_min);
+            forecastLayout.addView(view);
+        }
+        int includeforecast=prefs.getInt("includeforecastsign",0);
+        setincludeview(include_forecast,includeforecast);
+        setincludeview(space_forecast,includeforecast);
+        setincludeview(include_title_forecast,includeforecast);
+
+
+        /*for (Forecasts forecasts : weathers.forecastList){
             // 将未来几天的天气添加到视图中
             View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.weather_forecast_item, forecastLayout, false);
             TextView dateText = (TextView)view.findViewById(R.id.data_text);
@@ -576,12 +622,10 @@ public class MainActivity extends BaseActivity{
             infoText.setText(infotext);
             maxMinText.setText(forecasts.tmp_max + " ～ " + forecasts.tmp_min);
             forecastLayout.addView(view);
+        }*/
 
-            int includeforecast=prefs.getInt("includeforecastsign",0);
-            setincludeview(include_forecast,includeforecast);
-            setincludeview(space_forecast,includeforecast);
-            //显示小时预报
-                hourList.clear();
+        //显示小时预报
+        hourList.clear();
         for (Hourly hourly:weathers.hourlyList){
             Hour hour = new Hour();
             hour.setDegree(hourly.tmp + "°" );
@@ -590,13 +634,13 @@ public class MainActivity extends BaseActivity{
             hourList.add(hour);
         }
 
-             hourAdapter.notifyDataSetChanged();
+        hourAdapter.notifyDataSetChanged();
 
 
-            int includehourly = prefs.getInt("includehourlysign", 0);
-            setincludeview(include_hourly,includehourly);
-            setincludeview(space_hourly,includehourly);
-        }
+        int includehourly = prefs.getInt("includehourlysign", 0);
+        setincludeview(include_hourly,includehourly);
+        setincludeview(space_hourly,includehourly);
+        setincludeview(include_title_huorly,includehourly);
     }
     private void showWeatherInfo(Weather weather){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -668,6 +712,7 @@ public class MainActivity extends BaseActivity{
         int includeaqi = prefs.getInt("includeaqisign",0);
         setincludeview(include_aqi,includeaqi);
         setincludeview(space_aqi,includeaqi);
+        setincludeview(include_title_aqi,includeaqi);
         // 舒适指数
 
         comfortSign = weather.suggestion.comfort.sign;
@@ -701,6 +746,7 @@ public class MainActivity extends BaseActivity{
         int includesuggestion=prefs.getInt("includesuggestionsign",0);
         setincludeview(include_suggestion,includesuggestion);
         setincludeview(space_suggestion,includesuggestion);
+        setincludeview(include_title_suggestion,includesuggestion);
 
 
 
@@ -820,6 +866,10 @@ public class MainActivity extends BaseActivity{
                 Intent intent = new Intent(this,ChooseAreaActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.title_forecast:
+                Intent intent1 = new Intent(this,ForecastActivity.class);
+                startActivity(intent1);
+                break;
             case R.id.iv_loc:
                 showShort("开始定位");
                 LocationClientOption option = new LocationClientOption();
@@ -828,8 +878,8 @@ public class MainActivity extends BaseActivity{
                 mlocationClient.start();
                 break;
             case R.id.weather_now_layout:
-                Intent intent1 = new Intent(this,NowInfoActivity.class);
-                startActivity(intent1);
+                Intent intent2 = new Intent(this,NowInfoActivity.class);
+                startActivity(intent2);
                 break;
             case R.id.calculator_button:
                 Intent intent4 = new Intent(this,CalculatorActivity.class);
