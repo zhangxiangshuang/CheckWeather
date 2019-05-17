@@ -1,24 +1,25 @@
 package com.jason.checkweather;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
+import com.baidu.location.LocationClientOption;
 import com.jason.checkweather.gson.Forecasts;
 import com.jason.checkweather.gson.Weathers;
 import com.jason.checkweather.util.Time;
 import com.jason.checkweather.util.Utility;
+import com.jason.checkweather.view.FutureDaysChart;
+import com.jason.checkweather.view.ScrollFutureDaysWeatherView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,12 +30,14 @@ public class ForecastActivity extends AppCompatActivity {
     private ScrollFutureDaysWeatherView scrollFutureDaysWeatherView;
     private FutureDaysChart futureDaysChart;
     private List<Weather> datas=new ArrayList<>();
+    private ImageView closeActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forecast);
         scrollFutureDaysWeatherView= (ScrollFutureDaysWeatherView) findViewById(R.id.sfdwv);
         futureDaysChart=scrollFutureDaysWeatherView.getSevenDaysChart();
+        closeActivity= (ImageView) findViewById(R.id.close_image);
 //        futureDaysChart.setCubic(true);
 
 
@@ -81,8 +84,14 @@ public class ForecastActivity extends AppCompatActivity {
                 tvWeek.setTextColor(Color.BLACK);
             }
         }
-    }
 
+        closeActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
 
     private void showWeathersInfo(Weathers weathers)
     {
@@ -102,5 +111,7 @@ public class ForecastActivity extends AppCompatActivity {
         }
 
     }
+
+
 
 }

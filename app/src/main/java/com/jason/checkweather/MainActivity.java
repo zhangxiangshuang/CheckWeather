@@ -45,13 +45,20 @@ import com.jason.checkweather.gson.Weather;
 import com.jason.checkweather.gson.Weathers;
 import com.jason.checkweather.service.AutoUpdateService;
 import com.jason.checkweather.util.HttpUtil;
+import com.jason.checkweather.util.IconUtils;
 import com.jason.checkweather.util.TaskKiller;
 import com.jason.checkweather.util.Time;
 import com.jason.checkweather.util.Utility;
+import com.jason.checkweather.view.MiuiWeatherView;
+import com.jason.checkweather.view.WeatherBean;
+
+import org.joda.time.DateTime;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -61,7 +68,7 @@ public class MainActivity extends BaseActivity{
     private static final String TAG = "MainActivity";
     private static int SIGN_NO_INTERNET = 0;
     private static int SIGN_ALARMS = 1;
-
+    private MiuiWeatherView weatherView;
     private ScrollView weatherLayout;
 
     private LinearLayout mainLayout;
@@ -73,9 +80,12 @@ public class MainActivity extends BaseActivity{
     private ImageView iv_add_city;
     private ImageView weather_info_code;
 
+    private ImageView ivBack;
+
     //引入布局开关
 
     private View include_hourly;
+    private View include_hourlys;
     private View space_hourly;
     private View include_forecast;
     private View space_forecast;
@@ -90,6 +100,7 @@ public class MainActivity extends BaseActivity{
     private View include_title_suggestion;
     private View include_addfunction;
     private View include_title_forecast;
+
 
     List<String> permissionList  = new ArrayList<>();
 
@@ -214,6 +225,7 @@ public class MainActivity extends BaseActivity{
 
 
         include_hourly=findViewById(R.id.include_hourly);
+        include_hourlys=findViewById(R.id.include_hourlys);
         include_forecast=findViewById(R.id.include_forecast);
         include_aqi=findViewById(R.id.include_aqi);
         include_suggestion=findViewById(R.id.include_suggestion);
@@ -243,6 +255,7 @@ public class MainActivity extends BaseActivity{
 
 
         // weather_now
+        ivBack= (ImageView) findViewById(R.id.iv_Back);
         degreeText = (TextView)findViewById(R.id.degree_text);
         weatherInfoText = (TextView)findViewById(R.id.weather_info_text);
         weaherNowLayout = (RelativeLayout)findViewById(R.id.weather_now_layout);
@@ -558,6 +571,7 @@ public class MainActivity extends BaseActivity{
         }
         degreeText.setText(degree);
         weatherInfoText.setText(weatherInfo);
+        changeBack(weathers.now.cond_code);
         forecastLayout.removeAllViews();
 
 
@@ -624,8 +638,19 @@ public class MainActivity extends BaseActivity{
             forecastLayout.addView(view);
         }*/
 
+
+        weatherView = (MiuiWeatherView) findViewById(R.id.weather);
+        List<WeatherBean> data = new ArrayList<>();
+
+        for (Hourly hourly:weathers.hourlyList){
+            WeatherBean b1 = new WeatherBean(hourly.cond_txt,Integer.valueOf(hourly.tmp),hourly.time.split(" ")[1]);
+            data.add(b1);
+        }
+
+        weatherView.setData(data);
+
         //显示小时预报
-        hourList.clear();
+        /*hourList.clear();
         for (Hourly hourly:weathers.hourlyList){
             Hour hour = new Hour();
             hour.setDegree(hourly.tmp + "°" );
@@ -635,10 +660,11 @@ public class MainActivity extends BaseActivity{
         }
 
         hourAdapter.notifyDataSetChanged();
-
+*/
 
         int includehourly = prefs.getInt("includehourlysign", 0);
         setincludeview(include_hourly,includehourly);
+        setincludeview(include_hourlys,includehourly);
         setincludeview(space_hourly,includehourly);
         setincludeview(include_title_huorly,includehourly);
     }
@@ -971,10 +997,31 @@ public class MainActivity extends BaseActivity{
             }
 
         }
+    }
 
 
 
-
-
+    public void changeBack(String condCode) {
+        int hour;
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+        if (cal.get(Calendar.AM_PM) == 0)
+            hour = cal.get(Calendar.HOUR);
+        else
+            hour = cal.get(Calendar.HOUR)+12;
+        if (hour > 6 && hour < 19) {
+            ivBack.setImageResource(IconUtils.getDayBack(condCode));
+        } else {
+            ivBack.setImageResource(IconUtils.getNightBack(condCode));
+        }
+        /*DateTime nowTime = DateTime.now();
+        int hourOfDay = nowTime.getHourOfDay();
+        Log.i(TAG,String.valueOf(hourOfDay));
+        Log.i(TAG,String.valueOf(hour));
+        if (hourOfDay > 6 && hourOfDay < 19) {
+            ivBack.setImageResource(IconUtils.getDayBack(condCode));
+        } else {
+            ivBack.setImageResource(IconUtils.getNightBack(condCode));
+        }*/
     }
 }

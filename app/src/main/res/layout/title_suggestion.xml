@@ -10,10 +10,13 @@
         android:id="@+id/title_suggestion"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:background="@drawable/shape_corner_up">
 
         <TextView
             android:text="生活指数"
+            android:id="@+id/textsuggestion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -23,8 +26,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:layout_marginTop="4dp"
-            android:background="#808080" />
+            android:layout_below="@+id/textsuggestion"
+            android:background="@color/colorFont" />
 
     </RelativeLayout>
 

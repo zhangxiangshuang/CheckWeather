@@ -1,7 +1,6 @@
-package com.jason.checkweather;
+package com.jason.checkweather.view;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
@@ -10,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
+import com.jason.checkweather.R;
 
 import java.util.ArrayList;
 import java.util.List;

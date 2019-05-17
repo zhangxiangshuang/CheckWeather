@@ -24,13 +24,14 @@
         android:layout_weight="1"
         android:scrollbars="none">
 
-        <com.jason.checkweather.ScrollFutureDaysWeatherView
+        <com.jason.checkweather.view.ScrollFutureDaysWeatherView
             android:id="@+id/sfdwv"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </HorizontalScrollView>
 
     <ImageView
+        android:id="@+id/close_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

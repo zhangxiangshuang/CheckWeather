@@ -14,6 +14,7 @@
 
         <TextView
             android:text="空气状况"
+            android:id="@+id/textaqi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -23,8 +24,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:layout_marginTop="4dp"
-            android:background="#808080" />
+            android:layout_below="@+id/textaqi"
+            android:background="@color/colorFont" />
 
     </RelativeLayout>
 

@@ -17,8 +17,8 @@
     <color name="colorPrimaryDark">#607D8B</color>
     <color name="colorAccent">#607D8B</color>
     <color name="colorFont">#f5f5f5</color>
-    <color name="colorBackground">#274B7E</color>
-    <color name="colorWhite">#417DD2</color>
+    <color name="colorBackground">#417DD2</color>
+    <color name="colorWhite">#5cace8</color>
     <color name="colorBlack">#ffffff</color>
     <color name="colorRed">#00BCD4</color>
 </resources>

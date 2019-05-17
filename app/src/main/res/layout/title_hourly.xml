@@ -13,6 +13,7 @@
         android:background="@drawable/shape_corner_up">
 
         <TextView
+            android:id="@+id/texthour"
             android:text="24小时预报"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,6 +21,11 @@
             android:gravity="center"
             android:textColor="@color/colorFont"
             android:textSize="20sp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/texthour"
+            android:background="@color/colorFont" />
     </RelativeLayout>
 
 </LinearLayout>

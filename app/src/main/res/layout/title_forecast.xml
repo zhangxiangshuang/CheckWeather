@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_marginTop="4dp"
-            android:background="#808080" />
+            android:background="@color/colorFont" />
         <TextView
             android:text="7天趋势预报"
             android:layout_width="wrap_content"

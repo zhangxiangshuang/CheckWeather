@@ -2,16 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="400dp"
-    android:background="@drawable/shape_corner_down">
+    android:layout_height="550dp"
+    >
+
 
 
     <RelativeLayout
         android:id="@+id/weather_now_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/shape_corner_down">
-
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/iv_Back"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/back_100n"/>
         <TextView
             android:id="@+id/degree_text"
             android:layout_width="wrap_content"
@@ -62,7 +67,7 @@
             android:id="@+id/update_time_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="340sp"
+            android:layout_marginTop="400sp"
             android:layout_centerHorizontal="true"
             android:textColor="@color/colorFont"
             android:textSize="12sp"/>

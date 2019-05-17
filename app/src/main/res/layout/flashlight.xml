@@ -10,10 +10,13 @@
         android:id="@+id/flashlight_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/shape_corner_up">
+        android:background="@drawable/shape_corner_up"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp">
 
         <TextView
             android:text="附加功能"
+            android:id="@+id/textadd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -23,8 +26,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:layout_marginTop="4dp"
-            android:background="#0C0C0C" />
+            android:layout_below="@+id/textadd"
+            android:background="@color/colorFont" />
 
     </RelativeLayout>
 

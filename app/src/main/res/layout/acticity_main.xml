@@ -31,6 +31,7 @@
 
                 <include layout="@layout/weather_now" />
 
+
                 <include
                     android:id="@+id/space_hourly"
                     layout="@layout/weather_space"/>
@@ -38,6 +39,10 @@
                 <include
                     android:id="@+id/include_title_hourly"
                     layout="@layout/title_hourly" />
+
+                <include
+                    android:id="@+id/include_hourlys"
+                    layout="@layout/weather_hourlys"/>
 
                 <include
                     android:id="@+id/include_hourly"

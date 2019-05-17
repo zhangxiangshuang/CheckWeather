@@ -1,4 +1,4 @@
-package com.jason.checkweather;
+package com.jason.checkweather.view;
 
 
 import android.content.Context;
@@ -15,6 +15,9 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 
+
+import com.jason.checkweather.Weather;
+import com.jason.checkweather.view.ScrollFutureDaysWeatherView;
 
 import java.util.List;
 
@@ -187,7 +190,7 @@ public class FutureDaysChart extends View {
         float nextPointX = Float.NaN;
         float nextPointY = Float.NaN;
 
-        float eachWidth=TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,ScrollFutureDaysWeatherView.ITEM_WIDTH,getContext().getResources().getDisplayMetrics());
+        float eachWidth=TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, ScrollFutureDaysWeatherView.ITEM_WIDTH,getContext().getResources().getDisplayMetrics());
         path.reset();
         canvas.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG|Paint.FILTER_BITMAP_FLAG));
 
