@@ -69,6 +69,7 @@ public class MainActivity extends BaseActivity{
     private static int SIGN_NO_INTERNET = 0;
     private static int SIGN_ALARMS = 1;
     private MiuiWeatherView weatherView;
+
     private ScrollView weatherLayout;
 
     private LinearLayout mainLayout;
@@ -78,6 +79,7 @@ public class MainActivity extends BaseActivity{
     private ImageView iv_loc;
 
     private ImageView iv_add_city;
+
     private ImageView weather_info_code;
 
     private ImageView ivBack;
@@ -571,7 +573,13 @@ public class MainActivity extends BaseActivity{
         }
         degreeText.setText(degree);
         weatherInfoText.setText(weatherInfo);
-        changeBack(weathers.now.cond_code);
+
+        Boolean isAuto=prefs.getBoolean("isAutosign",true);
+        if (isAuto) {
+            changeBack(weathers.now.cond_code);
+        }else {
+            changeBacks(weathers.now.cond_code);
+        }
         forecastLayout.removeAllViews();
 
 
@@ -831,9 +839,39 @@ public class MainActivity extends BaseActivity{
                 SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
                 SharedPreferences.Editor editor = pref.edit();
                 boolean isNight = pref.getBoolean("isNight", false);
+                boolean isAuto = pref.getBoolean("isAutosign",true);
+                if (isAuto){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setIcon(R.mipmap.logo);
+                    builder.setTitle("切换背景警告框");
+                    builder.setMessage("自动换背景已打开，是否前去关闭？");
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            Intent intent2 = new Intent(MainActivity.this, MenuSetting.class);
+                            intent2.putExtra("weather_title","设置");
+                            startActivity(intent2);
+                        }
+                    });
+                    //    设置一个NegativeButton
+                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            dialog.dismiss();
+                        }
+                    });
+                    //    显示出该对话框
+                    builder.show();
+                }
+                else{
                 if (isNight){
                     // 如果已经是夜间模式
                     getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
                     recreate();
                     editor.putBoolean("isNight", false);
                     editor.apply();
@@ -843,12 +881,23 @@ public class MainActivity extends BaseActivity{
                     recreate();
                     editor.putBoolean("isNight", true);
                     editor.apply();
-                }
+                }}
                 break;
         }
         return true;
     }
+    public void changeBacks(String condCode) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isNight = pref.getBoolean("isNight", false);
 
+        if (!isNight) {
+            ivBack.setImageResource(IconUtils.getDayBack(condCode));
+            Log.i(TAG,"更换白天背景已经执行");
+        } else {
+            ivBack.setImageResource(IconUtils.getNightBack(condCode));
+            Log.i(TAG,"更换夜晚背景已经执行");
+        }
+    }
     /**
      * 对 back 键监听，如果连续点击两次 back 键的时间差 < 2s ,则退出所有程序
      */
@@ -1002,6 +1051,9 @@ public class MainActivity extends BaseActivity{
 
 
     public void changeBack(String condCode) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = pref.edit();
+        boolean isNight = pref.getBoolean("isNight", false);
         int hour;
         Calendar cal = Calendar.getInstance();
         cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
@@ -1011,9 +1063,28 @@ public class MainActivity extends BaseActivity{
             hour = cal.get(Calendar.HOUR)+12;
         if (hour > 6 && hour < 19) {
             ivBack.setImageResource(IconUtils.getDayBack(condCode));
+            if (isNight){
+                // 如果已经是夜间模式
+                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                recreate();
+                editor.putBoolean("isNight", false);
+                editor.apply();
+            }
         } else {
             ivBack.setImageResource(IconUtils.getNightBack(condCode));
+            if (!isNight) {
+                // 如果是日间模式
+                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                recreate();
+                editor.putBoolean("isNight", true);
+                editor.apply();
+            }
         }
+
+
+
+
+
         /*DateTime nowTime = DateTime.now();
         int hourOfDay = nowTime.getHourOfDay();
         Log.i(TAG,String.valueOf(hourOfDay));

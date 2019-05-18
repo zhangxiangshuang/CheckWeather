@@ -32,6 +32,7 @@ public class MenuSetting extends BaseActivity {
     private Switch switch_aqi;
     private Switch switch_suggestion;
     private Switch switch_flashlight;
+    private Switch switch_isauto;
     private LinearLayout mainview;
     @Override
     public void initView() {
@@ -55,6 +56,7 @@ public class MenuSetting extends BaseActivity {
         switch_aqi= (Switch) findViewById(R.id.switch_aqi);
         switch_suggestion= (Switch) findViewById(R.id.switch_suggestion);
         switch_flashlight= (Switch) findViewById(R.id.switch_flashlight);
+        switch_isauto= (Switch) findViewById(R.id.switch_isAuto);
         mainview= (LinearLayout) view.findViewById(R.id.main_layout);
 
 
@@ -68,6 +70,12 @@ public class MenuSetting extends BaseActivity {
         int aqisign=prefs.getInt("includeaqisign",0);
         int suggestionsign=prefs.getInt("includesuggestionsign",0);
         int flashlightsign=prefs.getInt("includeflashlightsign",0);
+        boolean isAutosign=prefs.getBoolean("isAutosign",true);
+        if (isAutosign==true){
+            switch_isauto.setChecked(true);
+        }else {
+            switch_isauto.setChecked(false);
+        }
         setOnChecked(switch_hourly,hourlysign);
         setOnChecked(switch_forecast,forecastsign);
         setOnChecked(switch_aqi,aqisign);
@@ -77,6 +85,19 @@ public class MenuSetting extends BaseActivity {
 
     @Override
     public void initListener() {
+        switch_isauto.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(MenuSetting.this).edit();
+                if (isChecked){
+                    editor.putBoolean("isAutosign",true);
+                    editor.apply();
+                }else {
+                    editor.putBoolean("isAutosign",false);
+                    editor.apply();
+                }
+            }
+        });
         setSwitchOnChecked(switch_hourly,include_hourly,"includehourlysign");
         setSwitchOnChecked(switch_forecast,include_forecast,"includeforecastsign");
         setSwitchOnChecked(switch_aqi,include_aqi,"includeaqisign");
