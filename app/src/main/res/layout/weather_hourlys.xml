@@ -11,7 +11,7 @@
         android:id="@+id/weather"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:line_interval="60dp"
+        app:line_interval="50dp"
         app:min_point_height="60dp"
         app:background_color="@color/colorWhite" />
 

@@ -155,7 +155,13 @@ public class ChooseAreaActivity extends BaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        showCity(mCitySearch);
+                        if (mCitySearch!= null&&mCitySearch.status.equals("ok"))
+                        {
+                            showCity(mCitySearch);
+                        }
+                        else{
+                            showShort("输入错误，请重新输入！");
+                        }
                     }
                 });
             }

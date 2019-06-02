@@ -43,7 +43,8 @@ import java.util.Map;
 
 public class MiuiWeatherView extends View {
 
-    private static int DEFAULT_BULE = 0XFF00BFFF;
+//    private static int DEFAULT_BULE = 0XFF00BFFF;
+    private static int DEFAULT_BULE = Color.WHITE;
     private static int DEFAULT_GRAY = Color.WHITE;
 
     private int backgroundColor;
@@ -239,7 +240,7 @@ public class MiuiWeatherView extends View {
         for (int i = 0; i < weatherDatas.size(); i++) {
             int c = weatherDatas.get(i).first;
             String w = weatherDatas.get(i).second;
-            Log.d("ccy", "weatherMap i =" + i + ";count = " + c + ";weather = " + w);
+//            Log.d("ccy", "weatherMap i =" + i + ";count = " + c + ";weather = " + w);
         }
     }
 

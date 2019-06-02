@@ -44,7 +44,7 @@ public class Utility {
 
 
     /**
-     * 将返回的 JSON 数据解析成 Weather 实体类
+     * 将返回的 JSON 数据解析成 city 实体类
      */
     public static CitySearch parseCityResponse(String response) {
         try {

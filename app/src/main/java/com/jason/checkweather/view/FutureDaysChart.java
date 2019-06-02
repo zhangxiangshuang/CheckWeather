@@ -22,7 +22,6 @@ import com.jason.checkweather.view.ScrollFutureDaysWeatherView;
 import java.util.List;
 
 /**
- * Created by tb on 2017/5/13.
  * 未来若干天天气温度图表
  */
 

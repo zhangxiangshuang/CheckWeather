@@ -346,12 +346,14 @@ public class MainActivity extends BaseActivity{
                             finish();
                         }
                     }
+                    recreate();
                 }else{
                     // 发生未知错误
                     showShort("权限申请出现位置错误");
                 }
                 break;
             default:
+                recreate();
         }
     }
 
@@ -412,6 +414,8 @@ public class MainActivity extends BaseActivity{
                 // 无缓存时向服务器查询数据
                 if (getNetworkInfo() != null && getNetworkInfo().isAvailable()){
                     // 查询完之后显示 coordinatorLayout.setVisibility(View.VISIBLE);
+
+                    Log.i(TAG,"定位这里已运行");
                     LocationClientOption option = new LocationClientOption();
                     option.setIsNeedAddress(true);
                     mlocationClient.setLocOption(option);
@@ -457,11 +461,14 @@ public class MainActivity extends BaseActivity{
      * 用来自动定位,显示第一次的天气信息
      */
     public class MyLocationListener implements BDLocationListener{
+        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit();
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
            /* currentPosition = bdLocation.getCity();*/
             currentPosition = bdLocation.getDistrict();
+            Log.i(TAG,"定位这里已运行2");
             if (currentPosition != null){
+                editor.putString("cityName",currentPosition);
                 requestWeather(currentPosition);
                 showShort(currentPosition + " 定位成功");
             }else{
@@ -480,7 +487,7 @@ public class MainActivity extends BaseActivity{
      * 根据城市地点请求城市天气信息
      */
     public void requestWeather(final String cityName){
-
+        Log.i(TAG,"获取城市："+cityName);
         String address = "https://free-api.heweather.com/v5/weather?city=" + cityName + "&key=a0187789a4424bc89254728acd4a08ed";
         String addresss ="https://free-api.heweather.net/s6/weather?location=" + cityName + "&key=0c6010f67e4648e39af80b623c4b0cd1";
         Log.i(TAG,address);
@@ -542,7 +549,6 @@ public class MainActivity extends BaseActivity{
                         if (weathers != null & "ok".equals(weathers.status)){
                             SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit();
                             editor.putString("weatherResponses", responsesText);
-                            editor.putString("cityName",cityName);
                             editor.apply();
                             showWeathersInfo(weathers);
                         }else{
@@ -838,6 +844,7 @@ public class MainActivity extends BaseActivity{
             case R.id.night_model:
                 SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
                 SharedPreferences.Editor editor = pref.edit();
+                String cityName = pref.getString("cityName", null);
                 boolean isNight = pref.getBoolean("isNight", false);
                 boolean isAuto = pref.getBoolean("isAutosign",true);
                 if (isAuto){
@@ -871,14 +878,18 @@ public class MainActivity extends BaseActivity{
                 if (isNight){
                     // 如果已经是夜间模式
                     getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
-                    recreate();
+//                    recreate();
+//                    refresh();
+                    Log.i(TAG,"城市"+cityName);
+                    MainActivity.actionStart(MainActivity.this, cityName);
                     editor.putBoolean("isNight", false);
                     editor.apply();
                 }else{
                     // 如果是日间模式
                     getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    recreate();
+//                    recreate();
+//                    refresh();
+                    MainActivity.actionStart(MainActivity.this, cityName);
                     editor.putBoolean("isNight", true);
                     editor.apply();
                 }}
@@ -892,10 +903,10 @@ public class MainActivity extends BaseActivity{
 
         if (!isNight) {
             ivBack.setImageResource(IconUtils.getDayBack(condCode));
-            Log.i(TAG,"更换白天背景已经执行");
+            Log.i(TAG,"手动更换白天背景已经执行");
         } else {
             ivBack.setImageResource(IconUtils.getNightBack(condCode));
-            Log.i(TAG,"更换夜晚背景已经执行");
+            Log.i(TAG,"手动更换夜晚背景已经执行");
         }
     }
     /**
@@ -1025,7 +1036,7 @@ public class MainActivity extends BaseActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(TAG,"HAHHA");
+        Log.d(TAG,"onResume已执行");
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         String cityName = prefs.getString("cityName", null);
         String weatherString = prefs.getString("weatherResponse", null);        // weather 保存API 返回的字符串
@@ -1054,6 +1065,7 @@ public class MainActivity extends BaseActivity{
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = pref.edit();
         boolean isNight = pref.getBoolean("isNight", false);
+        String cityName=pref.getString("cityName",null);
         int hour;
         Calendar cal = Calendar.getInstance();
         cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
@@ -1066,7 +1078,7 @@ public class MainActivity extends BaseActivity{
             if (isNight){
                 // 如果已经是夜间模式
                 getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                recreate();
+                MainActivity.actionStart(MainActivity.this, cityName);
                 editor.putBoolean("isNight", false);
                 editor.apply();
             }
@@ -1075,7 +1087,7 @@ public class MainActivity extends BaseActivity{
             if (!isNight) {
                 // 如果是日间模式
                 getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                recreate();
+                MainActivity.actionStart(MainActivity.this, cityName);
                 editor.putBoolean("isNight", true);
                 editor.apply();
             }
@@ -1085,14 +1097,6 @@ public class MainActivity extends BaseActivity{
 
 
 
-        /*DateTime nowTime = DateTime.now();
-        int hourOfDay = nowTime.getHourOfDay();
-        Log.i(TAG,String.valueOf(hourOfDay));
-        Log.i(TAG,String.valueOf(hour));
-        if (hourOfDay > 6 && hourOfDay < 19) {
-            ivBack.setImageResource(IconUtils.getDayBack(condCode));
-        } else {
-            ivBack.setImageResource(IconUtils.getNightBack(condCode));
-        }*/
+
     }
 }

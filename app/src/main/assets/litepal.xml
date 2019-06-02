@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
-    <dbname value="CoolWeather"/>
+    <dbname value="CheckWeather"/>
     <version value="3"/>
 
     <list>

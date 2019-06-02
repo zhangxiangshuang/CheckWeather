@@ -57,7 +57,7 @@ public class AutoUpdateService extends Service {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String cityName = prefs.getString("cityName", null);
         if(cityName != null){
-            String address = "https://api.heweather.com/v5/weather?city=" + cityName + "&key=bc0418b57b2d4918819d3974ac1285d9";
+            String address = " https://free-api.heweather.com/v5/weather?city=" + cityName + "&key=a0187789a4424bc89254728acd4a08ed";
             String addresss ="https://free-api.heweather.net/s6/weather?location=" + cityName + "&key=0c6010f67e4648e39af80b623c4b0cd1";
             HttpUtil.sendOkHttpRequest(address, new Callback() {
                 @Override

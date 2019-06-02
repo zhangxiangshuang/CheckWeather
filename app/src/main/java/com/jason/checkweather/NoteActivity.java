@@ -42,11 +42,7 @@ public class NoteActivity extends BaseActivity
     @Override
     public void initData() {
         LitePal.getDatabase();
-        List<NoteRecond> noteReconds1=DataSupport.findAll(NoteRecond.class);
-        if(noteReconds1.size()==0) {
-            initializeLitePal();
-            noteReconds1 = DataSupport.findAll(NoteRecond.class);
-        }
+        List<NoteRecond> noteReconds1=DataSupport.order("id desc").find(NoteRecond.class);
         myBaseAdapter=new NoteRecondAdapter(NoteActivity.this, R.layout.list_item,noteReconds1);
         myListView.setAdapter(myBaseAdapter);
     }
@@ -74,23 +70,6 @@ public class NoteActivity extends BaseActivity
     }
 
 
-    //向数据库中添加数据
-    private void initializeLitePal() {
-
-        addRecordToLitePal("测试1","测试1111","2019-05-13");
-        addRecordToLitePal("测试2","测试2222","2019-05-13");
-    }
-
-
-    //数据库插入数据
-    private void addRecordToLitePal( String title_name, String text_body, String create_time) {
-        NoteRecond record=new NoteRecond();
-        record.setTitle_name(title_name);
-        record.setText_body(text_body);
-        record.setCreate_time(create_time);
-        record.save();
-        Log.d(TAG,"添加成功");
-    }
 
 
     @Override

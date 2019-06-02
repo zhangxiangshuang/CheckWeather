@@ -31,7 +31,7 @@ public class ScrollFutureDaysWeatherView extends ViewGroup{
      */
     private FutureDaysChart sevenDaysChart;
     /**
-     * 未来具体的天数（包含昨天一个）
+     * 未来具体的天数
      */
     public static final int days=7;
     /**
